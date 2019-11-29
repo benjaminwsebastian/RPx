@@ -1,0 +1,6 @@
+## move all columns except 1 to new file, keep delimiter"
+awk  -F'\t' '{s=;for(i=1;i<=NF;i++){f=(NF==i)?:FS;if(i!=1)s=s  f;}print s}' young_hisat2_expression.txt > young_values.txt
+
+## get first colomn
+cat old_hisat2_expression.txt | awk '{print $1}' > old_gene_ids.txt
+
