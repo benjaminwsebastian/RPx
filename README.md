@@ -11,6 +11,8 @@
 
 Just finished day 1 work on this. Testing should fail on the third test set but that is ok. v1.0 should be complete in the next 2-3 days.
 
+Just finished day 2 work on this. Added multiple tests and have everything working up through calculating q value in detector/src.py. Started work on multithreading.
+
 ---
 
 ### Configuration
