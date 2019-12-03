@@ -8,4 +8,6 @@ venv/
 
 /site
 
+_site/
+
 .tool-versions
