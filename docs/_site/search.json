@@ -14,17 +14,6 @@
 
 
 
-{
-"title": "Devepoment notes 0.1",
-"tags": "getting_started",
-"keywords": "dev notes, announcements, what's new, new features",
-"url": "dev_notes_0_1.html",
-"summary": "Development notes for version 0.1 of RPx"
-}
-,
-
-
-
 
 
 {
@@ -599,11 +588,65 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
-"title": "Product 1",
+"title": "Detector Overview",
+"tags": "getting_started",
+"keywords": "overview, detector",
+"url": "v0.1_detector_overview.html",
+"summary": "Development notes for version 0.1 of RPx"
+}
+,
+
+
+
+{
+"title": "Development notes 0.1",
+"tags": "getting_started",
+"keywords": "dev notes, announcements, what's new, new features",
+"url": "v0.1_dev_notes.html",
+"summary": "Development notes for version 0.1 of RPx"
+}
+,
+
+
+
+{
+"title": "Introduction",
 "tags": "",
-"keywords": "mydoc",
-"url": "p1_landing_page.html",
+"keywords": "",
+"url": "v0.1_introduction.html",
 "summary": ""
 }
 ,
@@ -611,246 +654,13 @@
 
 
 {
-"title": "Sample 1 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample1.html",
-"summary": "This is just a sample topic..."
+"title": "Support",
+"tags": "getting_startedtroubleshooting",
+"keywords": "questions, troubleshooting, contact, support",
+"url": "v0.1_support.html",
+"summary": "Contact me for any support issues."
 }
 ,
-
-
-
-{
-"title": "Sample 2 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample2.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 3 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample3.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 4 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample4.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 5 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample5.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 6 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample6.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 7 Topic (Product 1)",
-"tags": "",
-"keywords": "sample",
-"url": "p1_sample7.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Product 2",
-"tags": "",
-"keywords": "mydoc",
-"url": "p2_landing_page.html",
-"summary": ""
-}
-,
-
-
-
-{
-"title": "Sample 1 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample1.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 10 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample10.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 11 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample11.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 12 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample12.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 13 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample13.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 14 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample14.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 2 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample2.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 3 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample3.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 4 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample4.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 5 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample5.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 6 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample6.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 7 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample7.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 8 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample8.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
-
-{
-"title": "Sample 9 Topic",
-"tags": "",
-"keywords": "sample",
-"url": "p2_sample9.html",
-"summary": "This is just a sample topic..."
-}
-,
-
-
 
 
 
@@ -862,51 +672,6 @@
 "summary": "Version 1.0 of RPx, inital release projected for January 1, 2020"
 }
 ,
-
-
-
-
-
-
-
-{
-"title": "Support",
-"tags": "getting_startedtroubleshooting",
-"keywords": "questions, troubleshooting, contact, support",
-"url": "support.html",
-"summary": "Contact me for any support issues."
-}
-,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

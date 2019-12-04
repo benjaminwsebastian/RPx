@@ -1,4 +1,4 @@
-# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+# The sidebar code loops through sections here and provides the appropriate formatting.
 
 entries:
 - title: sidebar
@@ -29,11 +29,11 @@ entries:
       type: homepage
 
     - title: Introduction
-      url: /mydoc_introduction.html
+      url: /v0.1_introduction.html
       output: web, pdf
 
     - title: Support
-      url: /support.html
+      url: /v0.1_support.html
       output: web, pdf
 
   - title: Release Notes
@@ -41,7 +41,7 @@ entries:
     folderitems:
 
     - title: 0.1 dev notes
-      url: /dev_notes_0_1.html
+      url: /v0.1_dev_notes.html
       output: web, pdf
 
   - title: Detector
@@ -49,7 +49,7 @@ entries:
 
     folderitems:
     - title: Overview
-      url: /coming_soon.html
+      url: /v0.1_detector_overview.html
       output: web, pdf
 
     - title: Quick Start
