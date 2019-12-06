@@ -25,4 +25,10 @@ def test_calculate_q_value():
 
     df["q_values"] = detector.compute_q_values(df["p_values"])
 
-    print(df.head(15))
+    q_values = df.head(10)["q_values"].tolist()
+    
+    for i in range(len(q_values)):
+        if isinstance(q_values[i], float):
+            q_values[i] = 0.0
+            
+    assert np.array_equal(q_values, ['NOTEST', 'NOTEST', 'NOTEST', 'NOTEST', 0.0, 'NOTEST', 'NOTEST', 0.0, 'NOTEST', 0.0])

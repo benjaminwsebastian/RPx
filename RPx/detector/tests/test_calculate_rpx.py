@@ -22,4 +22,5 @@ def test_calculate_rpx():
 
     df["RPx"] = df.iloc[:, 1:(detector.config["LEN_SIGNALS"] + 1)].apply(detector.compute_rpx, axis = 1)
 
-    assert np.array_equal(df.head(5)["RPx"].tolist(), [-1.9083177261311262, -2.426449084522923, -1.9802520023660397, -1.3144941956479386, 0.7344137887533799])
+    RPxs = [round(x, 4) for x in df.head(5)["RPx"].tolist()]
+    assert np.array_equal(RPxs, [-1.9083, -2.4264, -1.9803, -1.3145, 0.7344])

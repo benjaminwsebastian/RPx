@@ -21,7 +21,7 @@ def test_init():
         "STAGGER"                  : False,
         "USE_Z_SCORE"              : False,
         "NUM_PERMUTATIONS"         : 5000,
-        "NUM_CORES"                : 1,
+        "NUM_PROCS"                : 1,
         "SHUFFLE_WITH_REPLACEMENT" : False,
         "MIN_RP24"                 : 0.0,                                                       
         "FILTER_DETECTABLE"        : False,
@@ -36,4 +36,4 @@ def test_repr():
 
     detector = src.detector("Name", 2, 4)
 
-    assert detector.__repr__() == '<File Name, Period: 2, n_Cycles: 4, num_cores: 1, filter_detectable: False, filter_zero: False>'
+    assert detector.__repr__() == '<File Name, Period: 2, n_Cycles: 4, num_procs: 1, filter_detectable: False, filter_zero: False>'

@@ -4,7 +4,7 @@ import datetime
 import numpy as np
 import scipy.stats as stats
 import pandas as pd
-import threading
+import multiprocessing
 
 class detector(object):
 
@@ -14,7 +14,7 @@ class detector(object):
             "STAGGER"                  : False,
             "USE_Z_SCORE"              : False,
             "NUM_PERMUTATIONS"         : 5000,
-            "NUM_CORES"                : 1,
+            "NUM_PROCS"                : 1,
             "SHUFFLE_WITH_REPLACEMENT" : False,
             "MIN_RP24"                 : 0.0,
             "FILTER_DETECTABLE"        : False,
@@ -36,7 +36,7 @@ class detector(object):
             raise KeyError("Missing required argument\n Required arguments: file_name, period, n_cycles\n note that n_cycles is the same as number of replacates in circadian research")
 
     def __repr__(self):
-        return '<File {}, Period: {}, n_Cycles: {}, num_cores: {}, filter_detectable: {}, filter_zero: {}>'.format(self.config["FILE_NAME"], self.config["PERIOD"], self.config["N_CYCLES"], self.config["NUM_CORES"], self.config["FILTER_DETECTABLE"], self.config["FILTER_ZERO"])
+        return '<File {}, Period: {}, n_Cycles: {}, num_procs: {}, filter_detectable: {}, filter_zero: {}>'.format(self.config["FILE_NAME"], self.config["PERIOD"], self.config["N_CYCLES"], self.config["NUM_PROCS"], self.config["FILTER_DETECTABLE"], self.config["FILTER_ZERO"])
 
     ###########
     ## INPUT ##
@@ -89,7 +89,7 @@ class detector(object):
     ###########################
 
     def compute_phase(self, signal):
-        signal = signal.tolist()[1:len(signal)]
+        signal = signal.tolist()
         
         components = np.fft.fft(signal)
         phi = np.angle(complex(components[2].real, components[2].imag))
@@ -124,13 +124,20 @@ class detector(object):
         
         if RPx >= self.config["MIN_RP24"]:
             # first compute random shuffles of expression
+            # RPxs_shuffled = []
+            queue = multiprocessing.Queue()
+            jobs = []
+            for i in range(self.config["NUM_PROCS"]):
+                process = multiprocessing.Process(target=self._compute_permutations, args=(signal, queue,))
+                jobs.append(process)
+                process.start()
+
+            for j in jobs:
+                j.join()
+                
             RPxs_shuffled = []
-            threads = []
-            for i in range(self.config["NUM_CORES"]):
-                threads.append(threading.Thread(target=self._compute_permutations, args=(signal,)))
-                threads[i].start()
-            for i in range(self.config["NUM_CORES"]):
-                RPxs_shuffled.append(threads[i].join())
+            while not queue.empty():
+                RPxs_shuffled.append(queue.get())
 
             # next compute the p-value
             if self.config["USE_Z_SCORE"]:
@@ -149,13 +156,12 @@ class detector(object):
             return "NOTEST"
 
     def compute_q_values(self, p_values):
-        print(p_values.tolist())
         p_values = p_values.tolist()
         q_values_final = [0] * len(p_values)
         p_values_unsorted = []
-        for id, p_value in enumerate(p_values):
+        for i, p_value in enumerate(p_values):
             if p_value != "NOTEST":
-                p_values_unsorted.append((id, p_value))
+                p_values_unsorted.append((i, p_value))
 
         # Sort list by p value
         p_values_sorted = sorted(p_values_unsorted, key=lambda p:p[1])
@@ -164,20 +170,20 @@ class detector(object):
         q_prev = 1.0
         q_values = []
         for i in reversed(range(len(p_values_sorted))):
-            id, p_value = p_values_sorted[i]
+            j, p_value = p_values_sorted[i]
             r = float(i+1.0)
             q_temp = p_value * len(p_values_sorted) / r
             q_value = min(q_temp, q_prev)
             q_prev = q_value
-            q_values.append((id, q_value))
+            q_values.append((j, q_value))
 
         for i in range(len(q_values)):
-            id, q_value = q_values[i]
-            q_values_final[id] = q_value
+            j, q_value = q_values[i]
+            q_values_final[j] = q_value
 
         for i in range(len(p_values)):
             if p_values[i] == "NOTEST":
-                q_values_final[id] = "NOTEST"
+                q_values_final[i] = "NOTEST"
 
         return q_values_final
         
@@ -186,15 +192,16 @@ class detector(object):
     ###############
 
     def detect(self, signals):
-        signals["RPx"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(compute_rp24, axis = 1)
+        signals["RPx"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(self.compute_rpx, axis = 1)
 
         indexes = list(range(1, self.config["LEN_SIGNALS"] + 1)) + [len(signals.columns.tolist()) - 1] # separated for clarity - just the signal indexes and the index of the RPx
-        signals["p_values"] = signals.iloc[:, indexes].apply(compute_p_value, axis = 1)
+        signals["p_values"] = signals.iloc[:, indexes].apply(self.compute_p_value, axis = 1)
 
         signals["q_values"] = self.compute_q_values(signals["p_values"])
 
-        signals["phase"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(compute_phase, axis = 1)
-        signals["median"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(np.median, axis = 1)
+        signals["phase"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(self.compute_phase, axis = 1)
+        signals["mean"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(np.mean, axis = 1)
+        return signals
 
     ###########
     ## UTILS ##
@@ -222,13 +229,11 @@ class detector(object):
         else:
             return 1
 
-    def _compute_permutations(self, signal):
-        RPxs_shuffled = []
-        for i in range(int(self.config["NUM_PERMUTATIONS"] / self.config["NUM_CORES"])):
+    def _compute_permutations(self, signal, queue):
+        for i in range(int(self.config["NUM_PERMUTATIONS"] / self.config["NUM_PROCS"])):
             if self.config["SHUFFLE_WITH_REPLACEMENT"]:
                 shuffled = np.random.choice(signal, len(signal))
-                RPxs_shuffled.append(self.compute_rpx(shuffled))
+                queue.put(self.compute_rpx(shuffled))
             else:
                 np.random.shuffle(signal)
-                RPxs_shuffled.append(self.compute_rpx(signal))
-        return RPxs_shuffled
+                queue.put(self.compute_rpx(signal))
