@@ -53,11 +53,11 @@ entries:
       output: web, pdf
 
     - title: Quick Start
-      url: /coming_soon.html
+      url: /v0.1_detector_quick_start.html
       output: web, pdf
 
     - title: Theory
-      url: /coming_soon.html
+      url: /v0.1_detector_theory.html
       output: web, pdf
 
       subfolders:
