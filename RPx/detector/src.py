@@ -200,12 +200,12 @@ class detector(object):
         signals["q_values"] = self.compute_q_values(signals["p_values"])
 
         signals["phase"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(self.compute_phase, axis = 1)
-        signals["mean"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(np.mean, axis = 1)
+        signals["mean"] = signals.iloc[:, 1:(self.config["LEN_SIGNALS"] + 1)].apply(np.mean, axis=1)
         return signals
 
-    ###########
-    ## UTILS ##
-    ###########
+    #########
+    # UTILS #
+    #########
 
     def _correct_stagger(self, df):
         cols = df.columns.tolist()
