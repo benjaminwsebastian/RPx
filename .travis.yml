@@ -10,7 +10,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - travis_wait 20 pytest --cov=RPx
+  - travis_wait 35 pytest --cov=RPx
   - pip install .
 
 notifications:
