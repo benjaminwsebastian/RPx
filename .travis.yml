@@ -11,7 +11,7 @@ install:
 
 script:
   - pycodestyle RPx
-  - pytest --verbose --capture=no --cov=RPx/ RPx
+  - pytest --cov=RPx/
   - pip install .
 
 notifications:
