@@ -11,11 +11,11 @@ install:
 
 script:
   - pycodestyle RPx
-  - pytest --verbose --capture=no RPx
+  - pytest --verbose --capture=no --cov=RPx/ RPx
   - pip install .
 
 notifications:
   email: false
  
 after_success:
-  - codecov
+  - coveralls
