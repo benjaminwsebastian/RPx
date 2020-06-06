@@ -11,7 +11,7 @@ install:
 
 script:
   - black RPx/detector/src.py
-  - black RPx/utils.src.py
+  - black RPx/utils/src.py
   - pytest --cov=RPx
   - pip install .
 
